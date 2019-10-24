@@ -25,9 +25,14 @@ class WeatherComponent extends Component{
     }
 
     render() {
-        const { classes } = this.props;
+        const {
+            classes,
+            data,
+            temp,
+        } = this.props;
+        console.log('===>', this.props);
 
-        if (!this.props.data) {
+        if (!data) {
             return <Loader loadingText={appText.loadText} />;
         }
 
@@ -54,7 +59,10 @@ class WeatherComponent extends Component{
                     container
                     className={classes.blockGroup}
                 >
-                    <BlockGroup />
+                    <BlockGroup
+                        blocks={data}
+                        type={temp}
+                    />
                 </Grid>
                 <Grid
                     container

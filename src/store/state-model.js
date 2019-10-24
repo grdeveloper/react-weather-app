@@ -4,8 +4,7 @@ export const tempEnums = Object.freeze({
 });
 
 export const initialState = {
-    temperature: tempEnums.fahrenheit,
-    currentDate: null,
+    temp: tempEnums.fahrenheit,
     data: null,
     selectedData: null
 };
