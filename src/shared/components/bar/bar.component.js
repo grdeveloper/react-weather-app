@@ -5,23 +5,24 @@ import {
     Paper,
     Typography
 } from '../../../shared/material-ui';
+import {celsiusShort, fahrenheitShort} from "../../../i18n/weather.en";
 
 export const Bar = ({temperature, type}) => (
     <Grid
         container
         direction="column"
         justify="center"
-        style={{flexBasis: 40}}
+        style={{flexBasis: 38}}
     >
         <Paper
             style={{
-                maxWidth: 50,
-                height: temperature * 3,
-                backgroundColor: '#f50057'
+                maxWidth: 38,
+                backgroundColor: '#f50057',
+                paddingTop: type ? temperature * 3.5 : temperature / 1.1
             }}
         />
         <Typography
             variant='body1'
-        >{temperature} {type}</Typography>
+        >{temperature} {(type && celsiusShort) || fahrenheitShort}</Typography>
     </Grid>
 );

@@ -6,8 +6,24 @@ import {
     Grid
 } from '../../../shared/material-ui';
 
-export const Block = ({description, temperature, type}) => (
-    <Paper>
+import {
+    celsiusShort,
+    fahrenheitShort
+} from '../../../i18n/weather.en';
+import {
+    formatDate,
+    toCelsius,
+    toFahrenheit
+} from '../../utils';
+
+export const Block = ({description, block, type, selected, onSelect}) => (
+    <Paper
+        style={{
+            border: selected && '3px solid #2196F3',
+            cursor: 'pointer'
+        }}
+        onClick={onSelect}
+    >
         <Grid
             container
             direction="column"
@@ -25,7 +41,8 @@ export const Block = ({description, temperature, type}) => (
                 <Typography
                     variant="h2"
                     color="primary"
-                >{temperature} {type}</Typography>
+                >{(type && toCelsius(block)) || toFahrenheit(block)}
+                 {(type && celsiusShort) || fahrenheitShort}</Typography>
             </Grid>
             <Grid>
                 <Typography
@@ -34,7 +51,7 @@ export const Block = ({description, temperature, type}) => (
                 <Typography
                     variant="h2"
                     color="secondary"
-                >sdf</Typography>
+                >{formatDate(block[0].date)}</Typography>
             </Grid>
         </Grid>
     </Paper>

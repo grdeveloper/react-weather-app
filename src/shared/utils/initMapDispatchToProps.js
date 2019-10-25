@@ -2,9 +2,8 @@ import * as actions from '../../store/actions';
 
 export const initMapDispatchToProps = dispatch => ({
     fetchWeather: () => dispatch(actions.FetchWeather),
-    switchToCelsius: () => dispatch(actions.SwitchToCelsius),
-    switchToFahrenheit: () => dispatch(actions.SwitchToFahrenheit),
+    switchBetweenTemps: (type) => dispatch({...actions.SwitchBetweenTemps, payload: type}),
     goBackwards: () => dispatch(actions.GoBackwards),
     goForwards: () => dispatch(actions.GoForwards),
-    selectWeatherByDay: () => dispatch(actions.SelectWeatherByDay),
+    selectWeatherByDay: (day) => dispatch({...actions.SelectWeatherByDay, payload: day}),
 });

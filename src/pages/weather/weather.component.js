@@ -34,8 +34,10 @@ class WeatherComponent extends Component{
             classes,
             data,
             temp,
+            selectedDate,
+            switchBetweenTemps,
+            selectWeatherByDay
         } = this.props;
-        console.log('===>', this.props);
 
         if (!data) {
             return <Loader loadingText={loadText} />;
@@ -52,7 +54,11 @@ class WeatherComponent extends Component{
                     container
                     className={classes.checkboxGroup}
                 >
-                    <CheckboxGroup />
+                    <CheckboxGroup
+                        defaultSelected={temp}
+                        selections={[fahrenheitShort, celsiusShort]}
+                        onChange={(type) => switchBetweenTemps(type)}
+                    />
                 </Grid>
                 <Grid
                     container
@@ -65,16 +71,21 @@ class WeatherComponent extends Component{
                     className={classes.blockGroup}
                 >
                     <BlockGroup
+                        type={temp}
                         blocks={data}
-                        type={temp ? celsiusShort : fahrenheitShort}
+                        selected={selectedDate}
                         description={{temperature, date}}
+                        onSelect={(day) => selectWeatherByDay(day)}
                     />
                 </Grid>
                 <Grid
                     container
                     className={classes.barChart}
                 >
-                    <BarChart />
+                    {data[selectedDate] && <BarChart
+                        date={data[selectedDate]}
+                        type={temp}
+                    />}
                 </Grid>
             </Grid>
         );

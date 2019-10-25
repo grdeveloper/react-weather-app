@@ -6,5 +6,5 @@ export const tempEnums = Object.freeze({
 export const initialState = {
     temp: tempEnums.fahrenheit,
     data: null,
-    selectedData: null
+    selectedDate: null
 };

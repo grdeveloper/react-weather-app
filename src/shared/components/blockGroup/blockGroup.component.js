@@ -3,7 +3,7 @@ import React from 'react';
 import { Block } from '../';
 import { Grid } from '../../../shared/material-ui';
 
-export const BlockGroup = ({blocks, type, description}) => (
+export const BlockGroup = ({blocks, type, description, selected, onSelect}) => (
     <Grid
         container
         direction="row"
@@ -12,9 +12,11 @@ export const BlockGroup = ({blocks, type, description}) => (
         {blocks.map((block, index) => (
             <Block
                 key={index}
-                temperature={block[0].temp}
                 type={type}
+                block={block}
                 description={description}
+                onSelect={() => onSelect(index)}
+                selected={selected === index}
             />
         ))}
     </Grid>

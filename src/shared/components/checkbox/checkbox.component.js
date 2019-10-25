@@ -5,11 +5,12 @@ import {
     Radio
 } from '../../../shared/material-ui';
 
-export const Checkbox = ({selection}) => (
+export const Checkbox = ({selection, defaultSelected, onChange}) => (
     <FormControlLabel
         control={<Radio color={'primary'} />}
         value={selection}
         label={selection}
-        checked={selection === 'F'}
+        onChange={onChange}
+        checked={defaultSelected}
     />
 );

@@ -7,7 +7,7 @@ import {
     Grid
 } from '../../../shared/material-ui';
 
-export const CheckboxGroup = ({selections}) => (
+export const CheckboxGroup = ({selections, defaultSelected, onChange}) => (
     <FormControl
         style={{
             width: '80%',
@@ -24,10 +24,12 @@ export const CheckboxGroup = ({selections}) => (
                 justify="space-around"
                 alignItems="center"
             >
-                {['F', 'C'].map((selection, index) => (
+                {selections.map((selection, index) => (
                     <Checkbox
-                        selection={selection}
                         key={index}
+                        selection={selection}
+                        onChange={() => {onChange(index)}}
+                        defaultSelected={defaultSelected === index}
                     />
                 ))}
             </Grid>
