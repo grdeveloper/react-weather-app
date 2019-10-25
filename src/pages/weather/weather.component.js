@@ -5,9 +5,14 @@ import { withStyles } from '@material-ui/core/styles';
 import { weatherStyles } from './weather.component.style';
 import { Grid } from '../../shared/material-ui';
 
-import appText from '../../i18n/weather.en';
 import { initMapDispatchToProps } from '../../shared/utils';
-
+import {
+    loadText,
+    fahrenheitShort,
+    celsiusShort,
+    temperature,
+    date
+} from '../../i18n/weather.en';
 import {
     Loader,
     ArrowGroup,
@@ -33,7 +38,7 @@ class WeatherComponent extends Component{
         console.log('===>', this.props);
 
         if (!data) {
-            return <Loader loadingText={appText.loadText} />;
+            return <Loader loadingText={loadText} />;
         }
 
         return (
@@ -61,7 +66,8 @@ class WeatherComponent extends Component{
                 >
                     <BlockGroup
                         blocks={data}
-                        type={temp}
+                        type={temp ? celsiusShort : fahrenheitShort}
+                        description={{temperature, date}}
                     />
                 </Grid>
                 <Grid

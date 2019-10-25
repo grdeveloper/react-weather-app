@@ -12,10 +12,10 @@ export const Block = ({description, temperature, type}) => (
             container
             direction="column"
             justify="center"
-            alignItems="center"
             style={{
-                minWidth: 320,
-                height: 300
+                minWidth: 300,
+                height: 280,
+                textAlign: 'center'
             }}
         >
             <Grid>
