@@ -1,0 +1,1 @@
+export const select = (dates) => dates[0].date.slice(0, 10);

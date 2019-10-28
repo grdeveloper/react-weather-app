@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Bar } from '../';
 import { Grid } from '../../../shared/material-ui';
@@ -20,3 +21,8 @@ export const BarChart = ({date, type}) => (
         ))}
     </Grid>
 );
+
+BarChart.propTypes = {
+    date: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired
+};

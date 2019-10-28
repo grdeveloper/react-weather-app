@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
     Paper,
@@ -56,3 +57,11 @@ export const Block = ({description, block, type, selected, onSelect}) => (
         </Grid>
     </Paper>
 );
+
+Block.propTypes = {
+    description: PropTypes.object.isRequired,
+    block: PropTypes.array.isRequired,
+    type: PropTypes.number.isRequired,
+    selected: PropTypes.bool.isRequired,
+    onSelect: PropTypes.func.isRequired
+};

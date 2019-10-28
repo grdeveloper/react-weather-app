@@ -3,6 +3,6 @@ import { createAction } from '../shared/utils';
 
 export const FetchWeather = createAction(types.fetchWeather);
 export const SwitchBetweenTemps = createAction(types.switchBetweenTemps);
-export const GoBackwards = createAction(types.goBackwards);
-export const GoForwards = createAction(types.goForwards);
+export const CheckDimensions = createAction(types.checkDimensions);
+export const HandleNavigation = createAction(types.handleNavigation);
 export const SelectWeatherByDay = createAction(types.selectWeatherByDay);

@@ -1,6 +1,6 @@
 export const weatherStyles = () => ({
     arrowGroup: {
-        width: '100%',
+        width: '80%',
         marginBottom: 30
     },
     checkboxGroup: {

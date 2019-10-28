@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Checkbox } from '../';
 import {
@@ -36,3 +37,9 @@ export const CheckboxGroup = ({selections, defaultSelected, onChange}) => (
         </RadioGroup>
     </FormControl>
 );
+
+CheckboxGroup.propTypes = {
+    selections: PropTypes.array.isRequired,
+    defaultSelected: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired
+};

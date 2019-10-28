@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 
 import { weatherStyles } from './weather.component.style';
 import { Grid } from '../../shared/material-ui';
 
-import { initMapDispatchToProps } from '../../shared/utils';
+import {
+    select,
+    initMapDispatchToProps
+} from '../../shared/utils';
 import {
     loadText,
     fahrenheitShort,
@@ -25,8 +29,31 @@ const mapStateToProps = state => ({...state});
 const mapDispatchToProps = dispatch => initMapDispatchToProps(dispatch);
 
 class WeatherComponent extends Component{
+    resizeHandler = ({target: {innerWidth}}) => this.props.checkDimensions(innerWidth);
+
     componentDidMount() {
-        this.props.fetchWeather();
+        const {
+            fetchWeather,
+            checkDimensions
+        } = this.props;
+
+        const {
+            innerWidth,
+            addEventListener
+        } = window;
+
+        addEventListener('resize', this.resizeHandler);
+
+        checkDimensions(innerWidth);
+        fetchWeather();
+    }
+
+    componentWillUnmount() {
+        const {
+            removeEventListener
+        } = window;
+
+        removeEventListener('resize', this.resizeHandler);
     }
 
     render() {
@@ -34,9 +61,12 @@ class WeatherComponent extends Component{
             classes,
             data,
             temp,
+            pageSize,
+            pageIndex,
             selectedDate,
             switchBetweenTemps,
-            selectWeatherByDay
+            selectWeatherByDay,
+            handleNavigation
         } = this.props;
 
         if (!data) {
@@ -64,7 +94,12 @@ class WeatherComponent extends Component{
                     container
                     className={classes.arrowGroup}
                 >
-                    <ArrowGroup />
+                    <ArrowGroup
+                        size={data.length}
+                        pageSize={pageSize}
+                        pageIndex={pageIndex}
+                        onNavigate={(direction) => handleNavigation(direction)}
+                    />
                 </Grid>
                 <Grid
                     container
@@ -73,6 +108,8 @@ class WeatherComponent extends Component{
                     <BlockGroup
                         type={temp}
                         blocks={data}
+                        pageSize={pageSize}
+                        pageIndex={pageIndex}
                         selected={selectedDate}
                         description={{temperature, date}}
                         onSelect={(day) => selectWeatherByDay(day)}
@@ -82,9 +119,9 @@ class WeatherComponent extends Component{
                     container
                     className={classes.barChart}
                 >
-                    {data[selectedDate] && <BarChart
-                        date={data[selectedDate]}
+                    {selectedDate && <BarChart
                         type={temp}
+                        date={data.find(dates => select(dates) === selectedDate)}
                     />}
                 </Grid>
             </Grid>
@@ -93,3 +130,18 @@ class WeatherComponent extends Component{
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(weatherStyles)(WeatherComponent));
+
+WeatherComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+    data: PropTypes.array,
+    temp: PropTypes.number,
+    pageSize: PropTypes.number,
+    pageIndex: PropTypes.number,
+    selectedDate: PropTypes.string,
+
+    fetchWeather: PropTypes.func.isRequired,
+    switchBetweenTemps: PropTypes.func.isRequired,
+    checkDimensions: PropTypes.func.isRequired,
+    handleNavigation: PropTypes.func.isRequired,
+    selectWeatherByDay: PropTypes.func.isRequired,
+};

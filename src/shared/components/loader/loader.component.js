@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
     Typography,
@@ -22,3 +23,7 @@ export const Loader = ({loadingText}) => (
         />
     </Grid>
 );
+
+Loader.propTypes = {
+    loadingText: PropTypes.string.isRequired
+};
