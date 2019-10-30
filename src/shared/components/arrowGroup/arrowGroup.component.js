@@ -12,7 +12,7 @@ import {
 export const ArrowGroup = ({size, pageSize, pageIndex, onNavigate}) => {
     let navigation = [leftArrow, rightArrow];
 
-    if (size === (pageIndex + 1) * pageSize) {
+    if (size <= (pageIndex + 1) * pageSize) {
         navigation = [leftArrow];
     }
 

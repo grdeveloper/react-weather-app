@@ -23,6 +23,6 @@ export const BarChart = ({date, type}) => (
 );
 
 BarChart.propTypes = {
-    date: PropTypes.string.isRequired,
+    date: PropTypes.array.isRequired,
     type: PropTypes.number.isRequired
 };

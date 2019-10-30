@@ -31,7 +31,7 @@ BlockGroup.propTypes = {
     blocks: PropTypes.array.isRequired,
     type: PropTypes.number.isRequired,
     description: PropTypes.object.isRequired,
-    selected: PropTypes.object,
+    selected: PropTypes.string,
     onSelect: PropTypes.func.isRequired,
     pageSize: PropTypes.number.isRequired,
     pageIndex: PropTypes.number.isRequired

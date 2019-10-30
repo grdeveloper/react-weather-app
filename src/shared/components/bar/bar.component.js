@@ -32,6 +32,6 @@ export const Bar = ({temperature, type}) => (
 );
 
 Bar.propTypes = {
-    temperature: PropTypes.number.isRequired,
+    temperature: PropTypes.string.isRequired,
     type: PropTypes.number.isRequired
 };
